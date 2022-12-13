@@ -1,13 +1,14 @@
 import produce from "immer";
+import { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../atom";
 import Todo from "../types/Todo";
 
-type Prop = {
+type Props = {
   item: Todo;
 };
 
-function TodoItem({ item }: Prop) {
+function TodoItem({ item }: Props) {
   const [todoList, setTodoList] = useRecoilState(todoListState);
 
   const deleteItem = () => {
@@ -29,17 +30,20 @@ function TodoItem({ item }: Prop) {
     );
   };
 
-  return (
-    <div>
-      <button onClick={toggleItemCompletion}>
-        {item.isComplete ? "完" : "未"}
-      </button>
-      {item.title}
-      <span onClick={deleteItem} style={{ cursor: "pointer" }}>
-        X
-      </span>
-    </div>
-  );
+  return useMemo(() => {
+    console.log(`TodoItem ${item.id} rendered.`);
+    return (
+      <div>
+        <button onClick={toggleItemCompletion}>
+          {item.isComplete ? "完" : "未"}
+        </button>
+        {item.title}
+        <span onClick={deleteItem} style={{ cursor: "pointer" }}>
+          X
+        </span>
+      </div>
+    );
+  }, [item]);
 }
 
 export default TodoItem;
