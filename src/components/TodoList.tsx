@@ -1,25 +1,6 @@
-import { atom, selector, useRecoilValue } from "recoil";
-import Todo from "../types/Todo";
-
-const todoListState = atom<Todo[]>({
-  key: "todoListState",
-  default: [
-    {
-      id: 0,
-      title: "メール送信",
-      isComplete: false,
-    },
-  ],
-});
-
-const todoListStatsState = selector({
-  key: "todoListStatsState",
-  get: ({ get }) => {
-    const todoList = get(todoListState);
-    const totalNum = todoList.length;
-    return totalNum;
-  },
-});
+import { useRecoilValue } from "recoil";
+import { todoListState } from "../atom";
+import { todoListStatsState } from "../selector";
 
 function TodoList() {
   const todoList = useRecoilValue(todoListState);
