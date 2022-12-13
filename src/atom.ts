@@ -11,3 +11,8 @@ export const todoListState = atom<Todo[]>({
     },
   ],
 });
+
+export const todoListFilterState = atom<string>({
+  key: "todoListFilterState",
+  default: "すべて",
+});
