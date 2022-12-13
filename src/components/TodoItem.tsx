@@ -1,6 +1,7 @@
-import Todo from "../types/Todo";
 import { useRecoilState } from "recoil";
+import produce from "immer";
 import { todoListState } from "../atom";
+import Todo from "../types/Todo";
 
 type Prop = {
   item: Todo;
@@ -12,21 +13,20 @@ function TodoItem({ item }: Prop) {
   const deleteItem = () => {
     console.log("delete", item.id);
     const index = todoList.findIndex((listItem) => listItem.id === item.id);
-    const newTodoList = [
-      ...todoList.slice(0, index),
-      ...todoList.slice(index + 1),
-    ];
-    setTodoList(newTodoList);
+    setTodoList(
+      produce(todoList, (draft) => {
+        draft.splice(index, 1);
+      })
+    );
   };
 
   const toggleItemCompletion = () => {
     const index = todoList.findIndex((listItem) => listItem.id === item.id);
-    const newTodoList = [
-      ...todoList.slice(0, index),
-      { ...item, isComplete: !item.isComplete },
-      ...todoList.slice(index + 1),
-    ];
-    setTodoList(newTodoList);
+    setTodoList(
+      produce(todoList, (draft) => {
+        draft[index].isComplete = !draft[index].isComplete;
+      })
+    );
   };
 
   return (
