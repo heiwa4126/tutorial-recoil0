@@ -1,5 +1,5 @@
-import { useRecoilState } from "recoil";
 import produce from "immer";
+import { useRecoilState } from "recoil";
 import { todoListState } from "../atom";
 import Todo from "../types/Todo";
 

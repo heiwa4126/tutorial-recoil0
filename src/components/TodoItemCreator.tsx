@@ -1,7 +1,7 @@
+import produce from "immer";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "../atom";
-import produce from "immer";
 
 function TodoItemCreator() {
   const [title, setTitle] = useState("");
