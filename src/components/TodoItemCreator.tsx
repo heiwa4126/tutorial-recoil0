@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "../atom";
+import produce from "immer";
 
 function TodoItemCreator() {
   const [title, setTitle] = useState("");
@@ -11,14 +12,15 @@ function TodoItemCreator() {
   };
 
   const addItem = () => {
-    setTodoList((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: getId(),
-        title: title,
-        isComplete: false,
-      },
-    ]);
+    setTodoList((oldList) => {
+      return produce(oldList, (draft) => {
+        draft.push({
+          id: getId(),
+          title: title,
+          isComplete: false,
+        });
+      });
+    });
     setTitle("");
   };
 
