@@ -9,6 +9,7 @@ type Props = {
 };
 
 const TodoItem = React.memo(({ item }: Props) => {
+  console.log(`TodoItem ${item.id} rendered.`);
   const [todoList, setTodoList] = useRecoilState(todoListState);
 
   const deleteItem = () => {

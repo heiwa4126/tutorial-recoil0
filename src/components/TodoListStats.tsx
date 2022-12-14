@@ -3,19 +3,17 @@ import { useRecoilValue } from "recoil";
 import { todoListStatsState } from "../selector";
 
 function TodoListStats() {
+  console.log("TodoListStats rendered.");
   const { totalNum, totalCompletedNum, totalUncompletedNum } =
     useRecoilValue(todoListStatsState);
 
-  return useMemo(() => {
-    console.log("TodoListStats rendered.");
-    return (
-      <ul>
-        <li>Todoの登録数:{totalNum}</li>
-        <li>完了の数:{totalCompletedNum}</li>
-        <li>未完了の数:{totalUncompletedNum}</li>
-      </ul>
-    );
-  }, [totalNum, totalCompletedNum, totalUncompletedNum]);
+  return (
+    <ul>
+      <li>Todoの登録数:{totalNum}</li>
+      <li>完了の数:{totalCompletedNum}</li>
+      <li>未完了の数:{totalUncompletedNum}</li>
+    </ul>
+  );
 }
 
 export default TodoListStats;
