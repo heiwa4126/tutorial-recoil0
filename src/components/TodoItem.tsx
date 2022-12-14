@@ -1,4 +1,5 @@
 import produce from "immer";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { todoListState } from "../atom";
 import Todo from "../types/Todo";
@@ -7,7 +8,7 @@ type Props = {
   item: Todo;
 };
 
-function TodoItem({ item }: Props) {
+const TodoItem = React.memo(({ item }: Props) => {
   const [todoList, setTodoList] = useRecoilState(todoListState);
 
   const deleteItem = () => {
@@ -41,6 +42,6 @@ function TodoItem({ item }: Props) {
       </span>
     </div>
   );
-}
+});
 
 export default TodoItem;
