@@ -1,16 +1,11 @@
-import { ConfigEnv, defineConfig } from "vite";
+import { ConfigEnv, defineConfig, UserConfigExport } from "vite";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
+
 export default defineConfig(({ command }: ConfigEnv) => {
-  return {
+  const cfg: UserConfigExport = {
     plugins: [react()],
-    esbuild:
-      command === "build"
-        ? {
-            drop: ["console", "debugger"], // https://esbuild.github.io/api/#drop
-          }
-        : null,
     build: {
       //// https://terser.org/docs/api-reference#minify-options
       // minify: "terser",
@@ -30,4 +25,12 @@ export default defineConfig(({ command }: ConfigEnv) => {
       },
     },
   };
+
+  if (command === "build") {
+    cfg.esbuild = {
+      drop: ["console", "debugger"], // https://esbuild.github.io/api/#drop
+    };
+  }
+
+  return cfg;
 });
