@@ -4,15 +4,16 @@ import TodoItem from "./TodoItem";
 import TodoItemCreator from "./TodoItemCreator";
 import TodoListFilters from "./TodoListFilters";
 import TodoListStats from "./TodoListStats";
+import TodoReset from "./TodoReset";
 
 function TodoList() {
   const todoList = useRecoilValue(filteredTodoListState);
-
   console.log(todoList);
   return (
     <>
       <h1>RecoilによるTodoアプリ</h1>
       <TodoListStats />
+      <TodoReset />
       <TodoListFilters />
       <TodoItemCreator />
       {todoList.map((item) => (
